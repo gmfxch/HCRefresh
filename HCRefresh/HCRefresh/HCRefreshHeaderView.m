@@ -57,7 +57,7 @@
 -(void)superScrollViewDidScroll
 {
     
-    if (self.superScrollView.isTracking) {
+    if (self.superScrollView.isDragging) {
         //此变量为了防止superScrollView刚显示出来就开始刷新的bug
         self.superScrollViewDidTouch = YES;
     }
@@ -69,7 +69,7 @@
   
     float progress = 0;
     float OffSetYWhenScrollTop = -self.superScrollView.contentInset.top;
-    if (self.superScrollView.contentOffset.y < OffSetYWhenScrollTop) {
+    if (self.superScrollView.contentOffset.y < OffSetYWhenScrollTop && self.superScrollView.isDragging) {
         
         moveY += lastOffsetY - self.superScrollView.contentOffset.y;
         progress = moveY / CGRectGetHeight(self.bounds);
@@ -79,6 +79,7 @@
         
         moveY = 0;
     }
+    
     animateView.progress = progress * progress * progress * progress;
     lastOffsetY = self.superScrollView.contentOffset.y;
     
@@ -130,7 +131,7 @@
         }];
 
         
-        //传递消息
+        //
         if (self.actionTarget && self.actionSelector) {
             objc_msgSend(self.actionTarget, self.actionSelector);
         }
@@ -168,7 +169,7 @@
         [self.superScrollView setContentOffset:CGPointMake(0, -superScrollViewOriInsert.top - CGRectGetHeight(self.bounds)) animated:NO];
     }];
     
-    //传递消息
+    //
     if (self.actionTarget && self.actionSelector) {
         objc_msgSend(self.actionTarget, self.actionSelector);
     }
@@ -185,8 +186,9 @@
         return;
     }
     
+    UIEdgeInsets inset = self.superScrollView.contentInset;
     [UIView animateWithDuration:0.5 animations:^{
-        [self.superScrollView setContentInset:UIEdgeInsetsMake(superScrollViewOriInsert.top, superScrollViewOriInsert.left, superScrollViewOriInsert.right, superScrollViewOriInsert.bottom)];
+        [self.superScrollView setContentInset:UIEdgeInsetsMake(inset.top - CGRectGetHeight(self.bounds), inset.left, inset.right, inset.bottom)];
     } completion:^(BOOL finished) {
         self.isOnHeaderRefreshing = NO;
     }];
@@ -202,8 +204,9 @@
     self.isOnHeaderRefreshing = NO;
     
     UIView  *view = self.superview.superview;
+    UIEdgeInsets inset = self.superScrollView.contentInset;
     [UIView animateWithDuration:0.5 animations:^{
-        [self.superScrollView setContentInset:UIEdgeInsetsMake(superScrollViewOriInsert.top, superScrollViewOriInsert.left, superScrollViewOriInsert.right, superScrollViewOriInsert.bottom)];
+        [self.superScrollView setContentInset:UIEdgeInsetsMake(inset.top - CGRectGetHeight(self.bounds), inset.left, inset.right, inset.bottom)];
     } completion:^(BOOL finished) {
         
         float height = 25;

@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, HCRefreshState){
 @property (nonatomic, weak) id                actionTarget;
 @property (nonatomic, assign) SEL             actionSelector;
 @property (nonatomic, assign) CGFloat         topInset;
+@property (nonatomic, assign) CGFloat         superScrollViewOriginOffsetY;
 @property (nonatomic, copy) HCRefreshActionBlock headerActionBlock;
 
 

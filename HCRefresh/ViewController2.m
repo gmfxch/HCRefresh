@@ -1,79 +1,61 @@
 //
-//  ViewController.m
+//  ViewController2.m
 //  HCRefresh
 //
-//  Created by chenhao on 16/10/18.
+//  Created by chenhao on 16/10/19.
 //  Copyright © 2016年 chenhao. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ViewController2.h"
 #import "HCRefresh.h"
 #import "HCRefreshManager.h"
-#import "ViewController2.h"
 #import "MJRefresh.h"
 
-@interface ViewController ()<UIScrollViewDelegate>
+
+@interface ViewController2 ()
 
 @end
 
-@implementation ViewController
+@implementation ViewController2
 {
     UIScrollView  *_scrollView;
+}
+
+-(void)dealloc
+{
+    NSLog(@"%s",__func__);
 }
 
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
-
-    self.title = @"HCRefresh";
+    self.title = @"title";
     self.view.backgroundColor = HC_UICOLOR_RGB(41, 47, 56);
-    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
-    
-    
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height + 200)];
     bgImageView.backgroundColor = [UIColor grayColor];
     
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    scrollView.delegate = self;
     scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(bgImageView.bounds));
     scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:scrollView];
     [scrollView addSubview:bgImageView];
     _scrollView = scrollView;
     
-//    _scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    
-    
-    //*********自定义刷新显示内容(可选)*********
-    [HCRefreshManager shareManager].refreshTitleColor = HC_UICOLOR_RGB(100, 100, 100);
-    [HCRefreshManager shareManager].refreshTitle = @"HCRefresh";
-    [HCRefreshManager shareManager].refreshTitleFont = [UIFont boldSystemFontOfSize:24];
-    [HCRefreshManager shareManager].refreshTitleTinColor = HC_UICOLOR_RGB(255, 255, 255);
-    [HCRefreshManager shareManager].footerRefreshHeight = 0;
-
     
     //*********添加刷新（selector方式）*********
     [scrollView hc_addHeaderRefreshWithTarget:self actionSelector:@selector(headerRefresh)];
     [scrollView hc_addFooterRefreshWithTarget:self actionSelector:@selector(footerRefresh)];
     
-//    UIButton  *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-//    btn.frame = CGRectMake(100, 300, 50, 50);
-//    [btn setTitle:@"push" forState:UIControlStateNormal];
-//    [btn addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
+//    _scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     
-}
-
--(void)push
-{
-    [self.navigationController pushViewController:[[ViewController2 alloc] init] animated:YES];
+    
 }
 
 -(void)headerRefresh
 {
-    NSLog(@"headerRefresh");
+    NSLog(@"headerRefresh22");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         //停止下拉刷新（不显示更新信息）
@@ -88,7 +70,7 @@
 
 -(void)footerRefresh
 {
-    NSLog(@"footerRefresh");
+    NSLog(@"footerRefresh22");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         //停止底部刷新

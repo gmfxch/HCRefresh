@@ -6,7 +6,7 @@
 //  Copyright © 2016年 chenhao. All rights reserved.
 //
 #define TINCOLOR_PERSENT  0.3
-#define ANIMATE_TIME      1.5
+#define ANIMATE_TIME      1.6
 
 #import "HCTextAnimateView.h"
 #import "UIBezierPath+StringPath.h"
@@ -37,10 +37,8 @@
         [self.layer addSublayer:shapLayer];
         _shapLayer = shapLayer;
         
-        
         UIBezierPath *path = [UIBezierPath pathWithNSString:title font:font];
         shapLayer.path = path.CGPath;
-        
         
         CGRect frame = [title boundingRectWithSize:CGSizeMake(1000, 1000) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:font} context:nil];
         textSize = frame.size;

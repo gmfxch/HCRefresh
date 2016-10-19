@@ -21,54 +21,55 @@
 @property(nonatomic, assign)SEL  footerActionSelector;
 @property(nonatomic, assign)CGFloat  topInset;
 @property(nonatomic, assign)BOOL     isOnFooterRefreshing;
+@property(nonatomic, assign)BOOL     didAddObserver;
 @property(nonatomic, copy)HCRefreshActionBlock footerActionBlock;
 
 @end
 
 @implementation UIScrollView (HCRefresh)
 
-
--(void)hookSelector
+-(void)dealloc
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-       
-        //监听滑动
-        [self hc_hookSelector:@selector(setContentOffset:) withAfterBlock:^{
-            
-            [self hc_scrollViewDidScroll];
-            
-        }];
-        
-        //监听导航栏改变
-        if ([self.superview.nextResponder isKindOfClass:[UIViewController class]]) {
-            
-            UIViewController *ctrl = (UIViewController*)self.superview.nextResponder;
-            if (ctrl.navigationController) {
-                
-                if (!ctrl.navigationController.isNavigationBarHidden && ctrl.automaticallyAdjustsScrollViewInsets) {
-                    self.topInset = 64;
-                }
-                
-                [ctrl.navigationController hc_hookSelector:@selector(setNavigationBarHidden:animated:) withAfterBlock:^{
-                    
-                    [self updateLayout];
-                    
-                }];
-                
-            }
-        }
-        
-        //监听inset
-        [self hc_hookSelector:@selector(setContentInset:) withAfterBlock:^{
-           
-            [self updateLayout];
-            
-        }];
-        
-    });
+    if (self.didAddObserver) {
+        [self removeObserver:self forKeyPath:@"contentOffset"];
+        [self removeObserver:self forKeyPath:@"contentInset"];
+    }
 }
 
+-(void)addObserver
+{
+    if (self.didAddObserver) {
+        return;
+    }
+    self.didAddObserver = YES;
+    
+    [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    [self addObserver:self forKeyPath:@"contentInset" options:NSKeyValueObservingOptionNew context:nil];
+    
+    if ([self.superview.nextResponder isKindOfClass:[UIViewController class]]) {
+        
+        UIViewController *ctrl = (UIViewController*)self.superview.nextResponder;
+        if (ctrl.navigationController) {
+            
+            if (!ctrl.navigationController.isNavigationBarHidden && ctrl.automaticallyAdjustsScrollViewInsets) {
+                self.topInset = 64;
+            }
+        }
+    }
+    
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"contentInset"])
+    {
+        [self updateLayout];
+    }
+    else
+    {
+        [self hc_scrollViewDidScroll];
+    }
+}
 
 -(void)hc_addHeaderRefreshWithTarget:(id)target actionSelector:(SEL)headerSelector
 {
@@ -76,7 +77,7 @@
         return;
     }
     
-    [self hookSelector];
+    [self addObserver];
     
     HCRefreshHeaderView *view = [[HCRefreshHeaderView alloc] initWithFrame:CGRectMake(0, -HEADER_HEIGHT-self.contentInset.top + self.topInset, CGRectGetWidth(self.bounds), HEADER_HEIGHT)];
     [self addSubview:view];
@@ -89,6 +90,7 @@
 
 -(void)hc_addFooterRefreshWithTarget:(id)target actionSelector:(SEL)footerSelector
 {
+    [self addObserver];
     self.footerActionTarget = target;
     self.footerActionSelector = footerSelector;
 }
@@ -97,7 +99,7 @@
 
 -(void)hc_addHeaderRefreshWithActionBlock:(HCRefreshActionBlock)actionBlock
 {
-    [self hookSelector];
+    [self addObserver];
     
     HCRefreshHeaderView *view = [[HCRefreshHeaderView alloc] initWithFrame:CGRectMake(0, -HEADER_HEIGHT-self.contentInset.top + self.topInset, CGRectGetWidth(self.bounds), HEADER_HEIGHT)];
     [self addSubview:view];
@@ -107,9 +109,8 @@
 
 -(void)hc_addFooterRefreshWithActionBlock:(HCRefreshActionBlock)actionBlock
 {
-    if (actionBlock) {
-        self.footerActionBlock = actionBlock;
-    }
+    [self addObserver];
+    self.footerActionBlock = actionBlock;
 }
 
 
@@ -135,10 +136,25 @@
     }
 }
 
+-(void)hc_setContentOffset:(CGPoint)contentOffset
+{
+    [self hc_setContentOffset:contentOffset];
+    [self hc_scrollViewDidScroll];
+}
+
+-(void)hc_setContentInset:(UIEdgeInsets)contentInset
+{
+    [self hc_setContentInset:contentInset];
+    [self updateLayout];
+//    NSLog(@"%p, contentInset = %f", self ,contentInset.top);
+}
+
 #pragma mark -滚动事件
 -(void)hc_scrollViewDidScroll
 {
     
+//    NSLog(@"%p, contentOffset = %f", self ,self.contentOffset.y);
+    self.hc_headerRefreshView.superScrollViewOriginOffsetY = self.contentOffset.y;
     [self.hc_headerRefreshView superScrollViewDidScroll];
     
     if ((self.contentOffset.y + self.bounds.size.height + self.contentInset.bottom - [HCRefreshManager shareManager].footerRefreshHeight) >= (self.contentSize.height)
@@ -241,6 +257,17 @@
 -(BOOL)isOnFooterRefreshing
 {
     return  [objc_getAssociatedObject(self, @"isOnFooterRefreshing") boolValue];
+}
+
+
+-(void)setDidAddObserver:(BOOL)didAddObserver
+{
+    objc_setAssociatedObject(self, @"didAddObserver", @(didAddObserver), OBJC_ASSOCIATION_ASSIGN);
+}
+
+-(BOOL)didAddObserver
+{
+    return  [objc_getAssociatedObject(self, @"didAddObserver") boolValue];
 }
 
 

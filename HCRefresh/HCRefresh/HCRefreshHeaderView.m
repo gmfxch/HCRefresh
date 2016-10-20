@@ -133,7 +133,7 @@
         
         //
         if (self.actionTarget && self.actionSelector) {
-            objc_msgSend(self.actionTarget, self.actionSelector);
+            HCRefreshMsgSend((__bridge void *)self.actionTarget, self.actionSelector);
         }
         
         if (self.headerActionBlock) {
@@ -171,7 +171,7 @@
     
     //
     if (self.actionTarget && self.actionSelector) {
-        objc_msgSend(self.actionTarget, self.actionSelector);
+        HCRefreshMsgSend((__bridge void *)self.actionTarget, self.actionSelector);
     }
     
     if (self.headerActionBlock) {

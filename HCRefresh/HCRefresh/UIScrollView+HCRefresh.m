@@ -14,6 +14,7 @@
 #import "HCRefreshHeaderView.h"
 #import "NSObject+HCHook.h"
 #import "HCRefreshManager.h"
+#import "HCRefresh.h"
 
 @interface UIScrollView()
 
@@ -165,7 +166,7 @@
         self.isOnFooterRefreshing = YES;
         //传递消息
         if (self.footerActionTarget && self.footerActionSelector) {
-            objc_msgSend(self.footerActionTarget, self.footerActionSelector);
+            HCRefreshMsgSend((__bridge void *)self.footerActionTarget, self.footerActionSelector);
         }
         if (self.footerActionBlock) {
             self.footerActionBlock();

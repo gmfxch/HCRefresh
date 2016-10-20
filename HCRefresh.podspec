@@ -7,6 +7,7 @@ Pod::Spec.new do |s|
   s.authors      = {'hao chen' => '1119799601@qq.com'}
   s.platform     = :ios, '7.0'
   s.source       = {:git => 'https://github.com/gmfxch/HCRefresh.git', :tag => s.version}
-  s.source_files = 'HCRefresh'
+  s.source_files = 'HCRefresh/**/*.{h,m}'
   s.requires_arc = true
+  s.public_header_files = 'HCRefresh/**/*.h'
 end

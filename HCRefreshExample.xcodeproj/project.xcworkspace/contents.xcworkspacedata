@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HCRefresh.xcodeproj">
+      location = "self:/Users/chenhao/Desktop/HCRefresh/HCRefreshExample.xcodeproj">
    </FileRef>
 </Workspace>

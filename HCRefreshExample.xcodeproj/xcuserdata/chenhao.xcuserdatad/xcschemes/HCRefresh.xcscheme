@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "871E20DF1DB5D0D0008C3191"
-               BuildableName = "HCRefresh.app"
-               BlueprintName = "HCRefresh"
-               ReferencedContainer = "container:HCRefresh.xcodeproj">
+               BuildableName = "HCRefreshExample.app"
+               BlueprintName = "HCRefreshExample"
+               ReferencedContainer = "container:HCRefreshExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "871E20DF1DB5D0D0008C3191"
-            BuildableName = "HCRefresh.app"
-            BlueprintName = "HCRefresh"
-            ReferencedContainer = "container:HCRefresh.xcodeproj">
+            BuildableName = "HCRefreshExample.app"
+            BlueprintName = "HCRefreshExample"
+            ReferencedContainer = "container:HCRefreshExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "871E20DF1DB5D0D0008C3191"
-            BuildableName = "HCRefresh.app"
-            BlueprintName = "HCRefresh"
-            ReferencedContainer = "container:HCRefresh.xcodeproj">
+            BuildableName = "HCRefreshExample.app"
+            BlueprintName = "HCRefreshExample"
+            ReferencedContainer = "container:HCRefreshExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "871E20DF1DB5D0D0008C3191"
-            BuildableName = "HCRefresh.app"
-            BlueprintName = "HCRefresh"
-            ReferencedContainer = "container:HCRefresh.xcodeproj">
+            BuildableName = "HCRefreshExample.app"
+            BlueprintName = "HCRefreshExample"
+            ReferencedContainer = "container:HCRefreshExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

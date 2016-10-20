@@ -4,7 +4,8 @@
 //
 //  Created by chenhao on 16/10/13.
 //  Copyright © 2016年 chenhao. All rights reserved.
-//
+////  代码地址：https://github.com/gmfxch/HCRefresh.git
+
 #define HC_UICOLOR_RGB(R,G,B) ([UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0])
 
 // 运行时objc_msgSend

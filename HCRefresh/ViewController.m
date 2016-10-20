@@ -9,8 +9,6 @@
 #import "ViewController.h"
 #import "HCRefresh.h"
 #import "HCRefreshManager.h"
-#import "ViewController2.h"
-#import "MJRefresh.h"
 
 @interface ViewController ()<UIScrollViewDelegate>
 
@@ -43,9 +41,6 @@
     [scrollView addSubview:bgImageView];
     _scrollView = scrollView;
     
-//    _scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    
-    
     //*********自定义刷新显示内容(可选)*********
     [HCRefreshManager shareManager].refreshTitleColor = HC_UICOLOR_RGB(100, 100, 100);
     [HCRefreshManager shareManager].refreshTitle = @"HCRefresh";
@@ -57,19 +52,9 @@
     //*********添加刷新（selector方式）*********
     [scrollView hc_addHeaderRefreshWithTarget:self actionSelector:@selector(headerRefresh)];
     [scrollView hc_addFooterRefreshWithTarget:self actionSelector:@selector(footerRefresh)];
-    
-//    UIButton  *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-//    btn.frame = CGRectMake(100, 300, 50, 50);
-//    [btn setTitle:@"push" forState:UIControlStateNormal];
-//    [btn addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn];
-    
+
 }
 
--(void)push
-{
-    [self.navigationController pushViewController:[[ViewController2 alloc] init] animated:YES];
-}
 
 -(void)headerRefresh
 {
@@ -81,7 +66,6 @@
         
         //停止下拉刷新（显示更新信息）
         [_scrollView hc_stopHeaderRefreshAndShowMessage:@"更新了10条信息"];
-//        [_scrollView.mj_header endRefreshing];
         
     });
 }

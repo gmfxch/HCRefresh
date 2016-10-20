@@ -56,7 +56,6 @@
 
 
 
-
 +(HCRefreshManager*)shareManager;
 
 @end

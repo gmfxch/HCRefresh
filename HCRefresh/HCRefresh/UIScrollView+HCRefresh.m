@@ -12,7 +12,6 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "HCRefreshHeaderView.h"
-#import "NSObject+HCHook.h"
 #import "HCRefreshManager.h"
 #import "HCRefresh.h"
 

@@ -17,7 +17,6 @@
 		871E21051DB5D124008C3191 /* HCTextAnimateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 871E20FF1DB5D123008C3191 /* HCTextAnimateView.m */; };
 		871E21061DB5D124008C3191 /* UIBezierPath+StringPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 871E21011DB5D123008C3191 /* UIBezierPath+StringPath.m */; };
 		871E21071DB5D124008C3191 /* UIScrollView+HCRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 871E21031DB5D123008C3191 /* UIScrollView+HCRefresh.m */; };
-		8745358D1DB7101F00BC37D8 /* NSObject+HCHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 8745358C1DB7101F00BC37D8 /* NSObject+HCHook.m */; };
 		874535901DB7422E00BC37D8 /* HCRefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8745358F1DB7422E00BC37D8 /* HCRefreshManager.m */; };
 /* End PBXBuildFile section */
 
@@ -41,8 +40,6 @@
 		871E21011DB5D123008C3191 /* UIBezierPath+StringPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+StringPath.m"; sourceTree = "<group>"; };
 		871E21021DB5D123008C3191 /* UIScrollView+HCRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HCRefresh.h"; sourceTree = "<group>"; };
 		871E21031DB5D123008C3191 /* UIScrollView+HCRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+HCRefresh.m"; sourceTree = "<group>"; };
-		8745358B1DB7101F00BC37D8 /* NSObject+HCHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HCHook.h"; sourceTree = "<group>"; };
-		8745358C1DB7101F00BC37D8 /* NSObject+HCHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HCHook.m"; sourceTree = "<group>"; };
 		8745358E1DB7422E00BC37D8 /* HCRefreshManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCRefreshManager.h; sourceTree = "<group>"; };
 		8745358F1DB7422E00BC37D8 /* HCRefreshManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCRefreshManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,8 +118,6 @@
 				871E20FF1DB5D123008C3191 /* HCTextAnimateView.m */,
 				871E21001DB5D123008C3191 /* UIBezierPath+StringPath.h */,
 				871E21011DB5D123008C3191 /* UIBezierPath+StringPath.m */,
-				8745358B1DB7101F00BC37D8 /* NSObject+HCHook.h */,
-				8745358C1DB7101F00BC37D8 /* NSObject+HCHook.m */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -202,7 +197,6 @@
 				871E21071DB5D124008C3191 /* UIScrollView+HCRefresh.m in Sources */,
 				871E21051DB5D124008C3191 /* HCTextAnimateView.m in Sources */,
 				871E20EB1DB5D0D0008C3191 /* ViewController.m in Sources */,
-				8745358D1DB7101F00BC37D8 /* NSObject+HCHook.m in Sources */,
 				874535901DB7422E00BC37D8 /* HCRefreshManager.m in Sources */,
 				871E20E81DB5D0D0008C3191 /* AppDelegate.m in Sources */,
 				871E21061DB5D124008C3191 /* UIBezierPath+StringPath.m in Sources */,

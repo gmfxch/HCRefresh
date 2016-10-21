@@ -3,7 +3,7 @@ HCRefresh是一款简单易用的刷新框架
 
 ## 效果展示
 
-![](https://raw.githubusercontent.com/gmfxch/HCRefresh/master/refresh3.gif)
+![](https://raw.githubusercontent.com/gmfxch/HCRefresh/master/HCRefresh_demo.gif)
 
 ## 代码集成
 ```

@@ -4,7 +4,7 @@ HCRefresh是一款简单易用的刷新框架
 ## 效果展示
 
 
-![](http://obs82vgf8.bkt.clouddn.com/refresh3.gif)
+![](https://raw.githubusercontent.com/gmfxch/HCRefresh/master/refresh3.gif)
 
 
 

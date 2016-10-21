@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'HCRefresh'
-  s.version      = '1.2.0'
+  s.version      = '1.2.1'
   s.summary      = "An easy way to use pull-to-refresh"
   s.homepage     = "https://github.com/gmfxch/HCRefresh"
   s.license      = "MIT"

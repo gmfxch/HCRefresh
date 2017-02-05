@@ -4,7 +4,7 @@
 //
 //  Created by chenhao on 16/10/13.
 //  Copyright © 2016年 chenhao. All rights reserved.
-////  代码地址：https://github.com/gmfxch/HCRefresh.git
+//  代码地址：https://github.com/gmfxch/HCRefresh.git
 
 
 #import "HCRefreshHeaderView.h"
@@ -18,32 +18,37 @@
 @interface HCRefreshHeaderView()
 
 @property(nonatomic, weak)UIScrollView  *superScrollView;
-@property(nonatomic, assign)BOOL        isPrepareRefreshing;
+@property(nonatomic, assign)float       progress;
 
 @end
 
 @implementation HCRefreshHeaderView
 {
-    CGFloat   lastOffsetY;
-    CGFloat   moveY;
+    UIView<HCRefreshCustomViewDelegate>       *customContentView;
     HCTextAnimateView  *animateView;
     UIEdgeInsets       superScrollViewOriInsert;
 }
 
--(instancetype)initWithFrame:(CGRect)frame
+-(instancetype)initWithFrame:(CGRect)frame customContentView:(Class)customViewClass
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame customContentView:customViewClass];
     if (self) {
-        
         self.backgroundColor = [UIColor  clearColor];
         self.clipsToBounds = NO;
-        self.refreshState = HCRefreshState_Normal;
+        
+        if (customViewClass) {
+            UIView<HCRefreshCustomViewDelegate> *view = [[customViewClass alloc] initWithFrame:self.bounds];
+            [self addSubview:view];
+            customContentView = view;
+            self.refreshState = HCRefreshState_Normal;
+            return self;
+        }
+        //添加默认UI效果
         animateView = [[HCTextAnimateView alloc] initWithTitle:[HCRefreshManager shareManager].refreshTitle font:[HCRefreshManager shareManager].refreshTitleFont];
         animateView.textColor = [HCRefreshManager shareManager].refreshTitleColor;
         animateView.animateTinColor = [HCRefreshManager shareManager].refreshTitleTinColor;
         animateView.progress = 0;
         [self addSubview:animateView];
-        
     }
     return self;
 }
@@ -52,95 +57,81 @@
 {
     [super layoutSubviews];
     animateView.frame = self.bounds;
+    customContentView.frame = self.bounds;
 }
 
-
+//scrollView滑动触发方法
 -(void)superScrollViewDidScroll
 {
-    
-    if (self.superScrollView.isDragging) {
-        //此变量为了防止superScrollView刚显示出来就开始刷新的bug
-        self.superScrollViewDidTouch = YES;
-    }
-    
-    if (!self.superScrollViewDidTouch) {
-        lastOffsetY = self.superScrollView.contentOffset.y;
+    if (!self.shouldBeginHandleScrollView) {
         return;
     }
-  
-    float progress = 0;
+    if (self.refreshState == HCRefreshState_StartRefresh) {
+        self.progress = 1.0;
+        return;
+    }
     float OffSetYWhenScrollTop = -self.superScrollView.contentInset.top;
-    if (self.superScrollView.contentOffset.y < OffSetYWhenScrollTop && self.superScrollView.isDragging) {
-        
-        moveY += lastOffsetY - self.superScrollView.contentOffset.y;
-        progress = moveY / CGRectGetHeight(self.bounds);
-        progress = progress <= 1.0 ? progress : 1.0;
-        
+    if (self.superScrollView.contentOffset.y < OffSetYWhenScrollTop){
+        float dis = OffSetYWhenScrollTop - self.superScrollView.contentOffset.y;
+        self.progress = dis/self.bounds.size.height;
+        self.progress = MIN(1.0, self.progress);
     }else{
-        
-        moveY = 0;
+        self.progress = 0;
     }
     
-    animateView.progress = progress * progress * progress * progress;
-    lastOffsetY = self.superScrollView.contentOffset.y;
-    
-    
-    HCRefreshState  newState;
-    if (progress >= 1.0){
-        if (self.superScrollView.isDragging){
-            //手指未松开
-            newState = HCRefreshState_PrepareRefresh;
-            self.isPrepareRefreshing = YES;
-        }
-        else{
-            newState = HCRefreshState_StartRefresh;
-        }
+    HCRefreshState newState;
+    if (self.progress >= 1.0) {
+        //准备刷新
+        newState = HCRefreshState_PrepareRefresh;
     }else{
-        if (self.isPrepareRefreshing && !self.superScrollView.isDragging) {
-            newState = HCRefreshState_StartRefresh;
-        }else{
-            newState = HCRefreshState_Normal;
-            self.isPrepareRefreshing = NO;
-        }
+        newState = HCRefreshState_Normal;
     }
     
-    if (newState != self.refreshState) {
+    //更新状态
+    if (self.refreshState != newState) {
         self.refreshState = newState;
     }
-    
-    
+
+}
+
+//手指离开scrollView触发方法
+-(void)superScrollViewDidEndTouch
+{
+    if (self.progress >= 1.0) {
+        //开始刷新
+        if ((self.refreshState != HCRefreshState_StartRefresh) &&
+            (self.superScrollView.hc_footerRefreshView.refreshState != HCRefreshState_StartRefresh)) { //和底部刷新不可同时触发
+            self.refreshState = HCRefreshState_StartRefresh;
+        }
+    }
 }
 
 
 -(void)setRefreshState:(HCRefreshState)refreshState
 {
-    _refreshState = refreshState;
+    [super setRefreshState:refreshState];
     
-    if (self.isOnHeaderRefreshing) {
-        return;
+    if (customContentView && [customContentView respondsToSelector:@selector(hcRefreshViewStateChangedWithNewState:)]) {
+        [customContentView hcRefreshViewStateChangedWithNewState:refreshState];
     }
     
     if (refreshState == HCRefreshState_StartRefresh)
     {
-        self.isOnHeaderRefreshing = YES;
         [animateView startAnimate];
         superScrollViewOriInsert = self.superScrollView.contentInset;
         
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.4 animations:^{
             [self.superScrollView setContentInset:UIEdgeInsetsMake(superScrollViewOriInsert.top + CGRectGetHeight(self.bounds), superScrollViewOriInsert.left, superScrollViewOriInsert.right, superScrollViewOriInsert.bottom)];
             [self.superScrollView setContentOffset:CGPointMake(0, -superScrollViewOriInsert.top - CGRectGetHeight(self.bounds)) animated:NO];
         }];
 
-        
-        //
         if (self.actionTarget && self.actionSelector) {
             HCRefreshMsgSend((__bridge void *)self.actionTarget, self.actionSelector);
         }
         
-        if (self.headerActionBlock) {
-            self.headerActionBlock();
+        if (self.refreshActionBlock) {
+            self.refreshActionBlock();
         }
-
     }
     else if (refreshState == HCRefreshState_PrepareRefresh)
     {
@@ -153,45 +144,27 @@
     
 }
 
-
 #pragma mark -action
--(void)startHeaderRefresh
+-(void)startRefresh
 {
-    if (self.isOnHeaderRefreshing) {
+    if (self.refreshState == HCRefreshState_StartRefresh) {
         return;
     }
-    self.isOnHeaderRefreshing = YES;
-    self.superScrollViewDidTouch = YES;
-    animateView.progress = 1.0;
-    [animateView startAnimate];
-    superScrollViewOriInsert = self.superScrollView.contentInset;
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.superScrollView setContentInset:UIEdgeInsetsMake(superScrollViewOriInsert.top + CGRectGetHeight(self.bounds) , superScrollViewOriInsert.left, superScrollViewOriInsert.right, superScrollViewOriInsert.bottom)];
-        [self.superScrollView setContentOffset:CGPointMake(0, -superScrollViewOriInsert.top - CGRectGetHeight(self.bounds)) animated:NO];
-    }];
-    
-    //
-    if (self.actionTarget && self.actionSelector) {
-        HCRefreshMsgSend((__bridge void *)self.actionTarget, self.actionSelector);
-    }
-    
-    if (self.headerActionBlock) {
-        self.headerActionBlock();
-    }
-    
+    self.progress = 1.0;
+    self.refreshState = HCRefreshState_StartRefresh;
 }
 
--(void)stopHeaderRefresh
+-(void)stopRefresh
 {
-    if (!self.isOnHeaderRefreshing) {
+    if (self.refreshState != HCRefreshState_StartRefresh) {
         return;
     }
-    
     UIEdgeInsets inset = self.superScrollView.contentInset;
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         [self.superScrollView setContentInset:UIEdgeInsetsMake(inset.top - CGRectGetHeight(self.bounds), inset.left, inset.right, inset.bottom)];
     } completion:^(BOOL finished) {
-        self.isOnHeaderRefreshing = NO;
+        self.refreshState = HCRefreshState_Normal;
+        self.progress = 0;
     }];
     
     [animateView stopAnimate];
@@ -199,10 +172,9 @@
 
 -(void)stopHeaderRefreshAndShowMessage:(NSString*)message
 {
-    if (!self.isOnHeaderRefreshing) {
+    if (self.refreshState != HCRefreshState_StartRefresh) {
         return;
     }
-    self.isOnHeaderRefreshing = NO;
     
     UIView  *view = self.superview.superview;
     UIEdgeInsets inset = self.superScrollView.contentInset;
@@ -210,8 +182,9 @@
         [self.superScrollView setContentInset:UIEdgeInsetsMake(inset.top - CGRectGetHeight(self.bounds), inset.left, inset.right, inset.bottom)];
     } completion:^(BOOL finished) {
         
+        self.refreshState = HCRefreshState_Normal;
         float height = 25;
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(view.frame) + self.topInset - height, self.bounds.size.width, height)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(view.frame) - height + self.superScrollView.contentInset.top, self.bounds.size.width, height)];
         label.backgroundColor = [HCRefreshManager shareManager].finishRefreshInfoTitleBackgroundColor;
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [HCRefreshManager shareManager].finishRefreshInfoTitleColor;
@@ -237,7 +210,6 @@
         
     }];
     
-    
     [animateView stopAnimate];
 }
 
@@ -246,6 +218,15 @@
 -(UIScrollView*)superScrollView
 {
     return (UIScrollView*)self.superview;
+}
+
+-(void)setProgress:(float)progress
+{
+    _progress = progress;
+    animateView.progress = progress * progress;
+    if (customContentView && [customContentView respondsToSelector:@selector(hcRefreshViewProgressChangedWithProgress:)]) {
+        [customContentView hcRefreshViewProgressChangedWithProgress:progress];
+    }
 }
 
 

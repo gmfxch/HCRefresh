@@ -4,7 +4,7 @@
 //
 //  Created by chenhao on 16/10/19.
 //  Copyright © 2016年 chenhao. All rights reserved.
-////  代码地址：https://github.com/gmfxch/HCRefresh.git
+//  代码地址：https://github.com/gmfxch/HCRefresh.git
 
 
 #import <Foundation/Foundation.h>
@@ -14,9 +14,14 @@
 
 
 /**
- * 顶部显示视图的高度（默认60像素）
+ * 顶部刷新视图的高度（默认60像素）
  */
 @property (nonatomic, assign)  CGFloat        headerRefreshViewHeight;
+
+/**
+ * 底部刷新视图的高度（默认50像素）
+ */
+@property (nonatomic, assign)  CGFloat        footerRefreshViewHeight;
 
 /**
  * 顶部显示的刷新文字内容（默认：“HCRefresh”）
@@ -38,11 +43,6 @@
  */
 @property (nonatomic, strong) UIFont          *refreshTitleFont;
 
-/**
- * 底部触发高度（默认为0，即UIScrollView刚好滑到底部就触发FooterRefresh）
- */
-@property (nonatomic, assign) CGFloat         footerRefreshHeight;
-
 
 /**
  * 停止下拉刷新后显示更新信息label的颜色（例如“更新了10条信息”，默认白色）
@@ -54,7 +54,14 @@
  */
 @property (nonatomic, strong) UIColor         *finishRefreshInfoTitleBackgroundColor;
 
-
+/**
+ * 上拉加载圆环颜色（默认灰色）
+ */
+@property (nonatomic, strong) UIColor         *footerRefreshCircleColor;
+/**
+ * 上拉加载UIActivityIndicatorView颜色（默认灰色）
+ */
+@property (nonatomic, strong) UIColor         *footerRefreshUIActivityIndicatorViewColor;
 
 
 +(HCRefreshManager*)shareManager;

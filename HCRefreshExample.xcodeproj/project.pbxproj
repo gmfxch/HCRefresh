@@ -19,6 +19,9 @@
 		8745367F1DB8964E00BC37D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8745366A1DB8964E00BC37D8 /* Main.storyboard */; };
 		874536861DB8964E00BC37D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 874536791DB8964E00BC37D8 /* main.m */; };
 		874536871DB8964E00BC37D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8745367B1DB8964E00BC37D8 /* ViewController.m */; };
+		8761DDE41E28B8A400DA134D /* CustomRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761DDE31E28B8A400DA134D /* CustomRefreshView.m */; };
+		87681B1D1E2760A000458EBE /* HCRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87681B1C1E2760A000458EBE /* HCRefreshFooterView.m */; };
+		87681B201E27620A00458EBE /* HCRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87681B1F1E27620A00458EBE /* HCRefreshBaseView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,12 @@
 		874536791DB8964E00BC37D8 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8745367A1DB8964E00BC37D8 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8745367B1DB8964E00BC37D8 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8761DDE21E28B8A400DA134D /* CustomRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRefreshView.h; sourceTree = "<group>"; };
+		8761DDE31E28B8A400DA134D /* CustomRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRefreshView.m; sourceTree = "<group>"; };
+		87681B1B1E2760A000458EBE /* HCRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCRefreshFooterView.h; sourceTree = "<group>"; };
+		87681B1C1E2760A000458EBE /* HCRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCRefreshFooterView.m; sourceTree = "<group>"; };
+		87681B1E1E27620A00458EBE /* HCRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCRefreshBaseView.h; sourceTree = "<group>"; };
+		87681B1F1E27620A00458EBE /* HCRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCRefreshBaseView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,24 +81,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		873E65621DB898090002C6F6 /* Other */ = {
+		872D70D11E4726D4008F345F /* CustomRefreshView(自定义刷新视图) */ = {
 			isa = PBXGroup;
 			children = (
-				874536671DB8964E00BC37D8 /* Assets.xcassets */,
-				874536681DB8964E00BC37D8 /* LaunchScreen.storyboard */,
-				8745366A1DB8964E00BC37D8 /* Main.storyboard */,
-				874536791DB8964E00BC37D8 /* main.m */,
-				873E65FB1DB8C7930002C6F6 /* Info.plist */,
+				8761DDE21E28B8A400DA134D /* CustomRefreshView.h */,
+				8761DDE31E28B8A400DA134D /* CustomRefreshView.m */,
 			);
-			name = Other;
+			name = "CustomRefreshView(自定义刷新视图)";
 			sourceTree = "<group>";
 		};
 		873E660E1DB8C9A80002C6F6 /* HCRefresh */ = {
 			isa = PBXGroup;
 			children = (
 				873E660F1DB8C9A80002C6F6 /* HCRefresh.h */,
+				87681B1E1E27620A00458EBE /* HCRefreshBaseView.h */,
+				87681B1F1E27620A00458EBE /* HCRefreshBaseView.m */,
 				873E66101DB8C9A80002C6F6 /* HCRefreshHeaderView.h */,
 				873E66111DB8C9A80002C6F6 /* HCRefreshHeaderView.m */,
+				87681B1B1E2760A000458EBE /* HCRefreshFooterView.h */,
+				87681B1C1E2760A000458EBE /* HCRefreshFooterView.m */,
 				873E66121DB8C9A80002C6F6 /* HCRefreshManager.h */,
 				873E66131DB8C9A80002C6F6 /* HCRefreshManager.m */,
 				873E66141DB8C9A80002C6F6 /* HCTextAnimateView.h */,
@@ -106,11 +116,16 @@
 			isa = PBXGroup;
 			children = (
 				873E660E1DB8C9A80002C6F6 /* HCRefresh */,
-				873E65621DB898090002C6F6 /* Other */,
+				872D70D11E4726D4008F345F /* CustomRefreshView(自定义刷新视图) */,
 				874536651DB8964E00BC37D8 /* AppDelegate.h */,
 				874536661DB8964E00BC37D8 /* AppDelegate.m */,
 				8745367A1DB8964E00BC37D8 /* ViewController.h */,
 				8745367B1DB8964E00BC37D8 /* ViewController.m */,
+				874536671DB8964E00BC37D8 /* Assets.xcassets */,
+				874536681DB8964E00BC37D8 /* LaunchScreen.storyboard */,
+				8745366A1DB8964E00BC37D8 /* Main.storyboard */,
+				874536791DB8964E00BC37D8 /* main.m */,
+				873E65FB1DB8C7930002C6F6 /* Info.plist */,
 			);
 			path = HCRefreshExample;
 			sourceTree = "<group>";
@@ -188,6 +203,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87681B201E27620A00458EBE /* HCRefreshBaseView.m in Sources */,
+				8761DDE41E28B8A400DA134D /* CustomRefreshView.m in Sources */,
 				873E661E1DB8C9A80002C6F6 /* UIScrollView+HCRefresh.m in Sources */,
 				874536871DB8964E00BC37D8 /* ViewController.m in Sources */,
 				874536861DB8964E00BC37D8 /* main.m in Sources */,
@@ -195,6 +212,7 @@
 				873E661D1DB8C9A80002C6F6 /* UIBezierPath+StringPath.m in Sources */,
 				873E661A1DB8C9A80002C6F6 /* HCRefreshHeaderView.m in Sources */,
 				8745367C1DB8964E00BC37D8 /* AppDelegate.m in Sources */,
+				87681B1D1E2760A000458EBE /* HCRefreshFooterView.m in Sources */,
 				873E661B1DB8C9A80002C6F6 /* HCRefreshManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

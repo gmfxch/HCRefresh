@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		872D70D31E485989008F345F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 872D70D21E485988008F345F /* Info.plist */; };
 		873E661A1DB8C9A80002C6F6 /* HCRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 873E66111DB8C9A80002C6F6 /* HCRefreshHeaderView.m */; };
 		873E661B1DB8C9A80002C6F6 /* HCRefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 873E66131DB8C9A80002C6F6 /* HCRefreshManager.m */; };
 		873E661C1DB8C9A80002C6F6 /* HCTextAnimateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 873E66151DB8C9A80002C6F6 /* HCTextAnimateView.m */; };
@@ -26,7 +25,6 @@
 
 /* Begin PBXFileReference section */
 		871E20E01DB5D0D0008C3191 /* HCRefreshExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCRefreshExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		872D70D21E485988008F345F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		873E660F1DB8C9A80002C6F6 /* HCRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCRefresh.h; sourceTree = "<group>"; };
 		873E66101DB8C9A80002C6F6 /* HCRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCRefreshHeaderView.h; sourceTree = "<group>"; };
 		873E66111DB8C9A80002C6F6 /* HCRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCRefreshHeaderView.m; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				874536671DB8964E00BC37D8 /* Assets.xcassets */,
 				874536681DB8964E00BC37D8 /* LaunchScreen.storyboard */,
 				8745366A1DB8964E00BC37D8 /* Main.storyboard */,
-				872D70D21E485988008F345F /* Info.plist */,
 				874536791DB8964E00BC37D8 /* main.m */,
 			);
 			path = HCRefreshExample;
@@ -189,7 +186,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				872D70D31E485989008F345F /* Info.plist in Resources */,
 				8745367F1DB8964E00BC37D8 /* Main.storyboard in Resources */,
 				8745367D1DB8964E00BC37D8 /* Assets.xcassets in Resources */,
 				8745367E1DB8964E00BC37D8 /* LaunchScreen.storyboard in Resources */,

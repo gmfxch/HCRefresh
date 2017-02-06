@@ -1,5 +1,5 @@
 # HCRefresh
-HCRefresh是一款简单易用的刷新框架
+HCRefresh是一个轻量级的刷新框架。使用简单方便，并支持刷新视图自定义
 
 ## 效果展示
 
@@ -77,7 +77,7 @@ pod 'HCRefresh'
  自定义CustomRefreshView类
  
  ```objc
- @interface CustomRefreshView()<HCRefreshCustomViewDelegate>
+@interface CustomRefreshView()<HCRefreshCustomViewDelegate>
 
 @end
 
@@ -91,7 +91,6 @@ pod 'HCRefresh'
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0];
-        
         UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
         label.font = [UIFont systemFontOfSize:15];
         label.textColor = [UIColor whiteColor];
@@ -133,7 +132,7 @@ pod 'HCRefresh'
     
  ```
  
- 添加自定义视图
+ 将CustomRefreshView设置为刷新视图
  ```objc
    [scrollView hc_addFooterRefreshWithTarget:self actionSelector:@selector(footerRefresh) customFooterView:[CustomRefreshView class]]; 
  ```

@@ -25,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		871E20E01DB5D0D0008C3191 /* HCRefreshExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCRefreshExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		872D70DF1E486CDE008F345F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		873E660F1DB8C9A80002C6F6 /* HCRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCRefresh.h; sourceTree = "<group>"; };
 		873E66101DB8C9A80002C6F6 /* HCRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCRefreshHeaderView.h; sourceTree = "<group>"; };
 		873E66111DB8C9A80002C6F6 /* HCRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCRefreshHeaderView.m; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 				874536671DB8964E00BC37D8 /* Assets.xcassets */,
 				874536681DB8964E00BC37D8 /* LaunchScreen.storyboard */,
 				8745366A1DB8964E00BC37D8 /* Main.storyboard */,
+				872D70DF1E486CDE008F345F /* Info.plist */,
 				874536791DB8964E00BC37D8 /* main.m */,
 			);
 			path = HCRefreshExample;
